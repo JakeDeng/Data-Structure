@@ -22,10 +22,34 @@ public:
     //Insert at the beginning of the linked list
     void Insert_Begin(int input){
 
-    Node* temp = new Node;  //create a new node from heap
-    temp->data = input;
-    temp->next = head;
-    head = temp;    
+        Node* temp = new Node;  //create a new node from heap
+        temp->data = input;
+        temp->next = head;
+        head = temp;    
+    }
+
+    //General Insertion
+    void Insert(int input, int index){
+        Node* temp1 = new Node;
+        temp1->data = input;
+        temp1->next = NULL;
+        //first node : at the beginning
+        if (index==1){
+            temp1->next = head;
+            head = temp1;
+            return;
+        }
+        //other positions
+        Node* temp2 = head;
+        for (int i = 0; i<index-2; i++){
+            temp2 = temp2->next;
+        }
+        temp1->next = temp2->next;
+        temp2->next = temp1;
+    }
+    //delete a node
+    void Delete(int index){
+        
     }
 
     //Print out the entire list
