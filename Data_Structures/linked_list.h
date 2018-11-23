@@ -9,6 +9,7 @@ struct Node{
     int data;   //data in the node
     Node* next; //address to next node
 };
+
 //Linked list class
 class Linked_List
 {
@@ -47,9 +48,51 @@ public:
         temp1->next = temp2->next;
         temp2->next = temp1;
     }
-    //delete a node
+    //delete a node at position n
     void Delete(int index){
+        Node* temp1 = head;//already point to the first node
+        //delete the head node
+        if(index ==1 ){
+            head = temp1->next;//head points to second node
+            free(temp1);
+            return;
+        }
+        //temp1 points to (n-1)th node
+        for(int i=0; i<index-2; i++){
+            temp1 = temp1->next;
+        }
+        Node* temp2 = temp1->next;//n th node
+        temp1->next = temp2->next;//fix the link
+        free(temp2);//free the address of n th node
         
+    }
+
+    //reverse a linked list
+    void Reverse_It(){
+        Node *current, *prev, *next;
+        current = head;
+        prev = NULL;
+        while(current != NULL){
+            next = current->next; //store the address of the next node
+            current->next = prev; //reverse the connection
+            prev = current;       //update the prev node address
+            current = next;       //update the current node address
+        }
+        head = prev;//update the head, point to the last node
+    }
+
+    void Reverse_Re(Node* p){
+        //Exit condition
+        if(p->next ==NULL)
+        {
+            head = p;
+            return;
+        }
+        Reverse_Re(p->next);
+        Node* q = p->next;
+        q->next = p;
+        p->next = NULL;
+
     }
 
     //Print out the entire list
@@ -65,7 +108,7 @@ public:
     }
 
 private:
-    Node* head;
+    Node* head;//store the address of the 
 };
 
 
